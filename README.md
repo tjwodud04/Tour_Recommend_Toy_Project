@@ -17,11 +17,14 @@
 
 ### 주요 구성 파일
 
-* `app.py` : Streamlit UI
-* `data_service.py` : TourAPI 호출/정규화/요약
-* `search_service.py` : 임베딩 캐시(JSONL) + 조회 흐름
-* `embedding_service.py` : OpenAI 임베딩
-* `config.py` : 환경설정(.env)
+* `app.py` : Streamlit UI(엔트리포인트)
+* `search_service.py` : 임베딩 시맨틱 캐시(JSONL) + 추천 오케스트레이션
+* `recommender.py` : 추천 로직(지역/분류 추출 → 목록/상세 → 요약/이미지 → 카드)
+* `tour_api_client.py` : 한국관광공사 TourAPI HTTP 클라이언트
+* `llm_client.py` : OpenAI 클라이언트 래퍼(채팅 + 임베딩)
+* `image_service.py` : 이미지 URL 검증/다운로드/캐시(공용)
+* `constants.py` : 도메인 상수(분류 코드/지역 힌트/필터)
+* `config.py` : 환경설정(.env) 및 전역 상수
 
 ### 요구사항
 
@@ -37,7 +40,7 @@ python -m venv .venv && . .venv/bin/activate  # Windows: .venv\Scripts\activate
 
 git clone https://github.com/tjwodud04/Tour_Recommend_Toy_Project.git
 cd ./Tour_Recommend_Toy_Project
-pip install requirements.txt
+pip install -r requirements.txt
 
 # 환경변수 설정 (example.env 파일 .env로 변경)
 OPENAI_API_KEY=sk-...
